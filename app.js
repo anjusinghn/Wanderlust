@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -51,7 +55,6 @@ app.get("/", (req, res) => {
   res.send("YAY Im working");
 });
 
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -62,7 +65,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
@@ -80,7 +83,7 @@ app.use((req,res,next) => {
 // });
 
 app.use("/listings", listingRouter);
-app.use("/listings/:id/reviews",reviewRouter);
+app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.all(/(.*)/, (req, res, next) => {
