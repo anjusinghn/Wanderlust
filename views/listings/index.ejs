@@ -12,7 +12,7 @@
         <% for (let listing of allListings) { %>
             <a href="/listings/<%= listing._id %>" class="listing-link text-decoration-none">
                 <div class="card listing-card">
-                    <img src="<%= listing.image %>" class="card-img-top" alt="<%= listing.title %>"
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>"
                         style="height: 20rem;" />
                     <div class="card-img-overlay"></div>
                     <div class="card-body">
